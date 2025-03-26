@@ -11,12 +11,12 @@ import wmi
 
 
 
-""" Create a class for the Defender check UI """
 class DefenderCheck(QWidget):
+    """ Create a class for the Defender check UI """
     defender_disabled_signal = pyqtSignal()
 
-    """ Initialization """
     def __init__(self, parent=None):
+        """ Initialization """
         super().__init__(parent)
         self.load_chakra_petch_font()
         self.setWindowTitle("Raven Talon")
@@ -36,8 +36,8 @@ class DefenderCheck(QWidget):
         self.check_defender_status(immediate_check=True)
         self.setLayout(layout)
 
-    """ Load the Chakra Petch font, which is used for the UI """
     def load_chakra_petch_font(self):
+        """ Load the Chakra Petch font, which is used for the UI """
         try:
             if getattr(sys, 'frozen', False):
                 base_path = sys._MEIPASS
@@ -54,8 +54,8 @@ class DefenderCheck(QWidget):
         except Exception as e:
             print(f"Error loading font: {e}")
 
-    """ Update the UI accordingly based on Windows Defender's status """
     def check_defender_status(self, immediate_check=False):
+        """ Update the UI accordingly based on Windows Defender's status """
         if immediate_check:
             if not self.is_defender_enabled():
                 self.message_label.setText("Windows Defender has been disabled. Close this window to proceed.")
@@ -75,8 +75,8 @@ class DefenderCheck(QWidget):
             else:
                 print("Defender is still enabled. Checking again in 3 seconds...")
 
-    """ Check if Windows Defender is enabled using WMI """
     def is_defender_enabled(self):
+        """ Check if Windows Defender is enabled using WMI """
         try:
             w = wmi.WMI(namespace="root\\SecurityCenter2")
             for defender in w.query("SELECT * FROM AntiVirusProduct"):
