@@ -13,14 +13,14 @@ from tqdm import tqdm
 
 
 
-""" Set up logging """
 def log(message):
+    """ Set up logging """
     logging.info(message)
 
 
 
-""" Utility function to fetch the packages.json file """
 def get_packages_json():
+    """ Utility function to fetch the packages.json file """
     url = "https://code.ravendevteam.org/packages.json"
     try:
         context = ssl._create_unverified_context()
@@ -32,8 +32,8 @@ def get_packages_json():
 
 
 
-""" Add exclusions for Raven software to Windows Defender """
 def add_defender_exclusion(path):
+    """ Add exclusions for Raven software to Windows Defender """
     try:
         subprocess.run(
             ['powershell.exe', '-ExecutionPolicy', 'Bypass', '-NoProfile', '-Command', 
@@ -49,8 +49,8 @@ def add_defender_exclusion(path):
 
 
 
-""" Utility function to get the installation path for Raven software """
 def get_installation_path():
+    """ Utility function to get the installation path for Raven software """
     if platform.system() == "Windows":
         install_path = Path(os.getenv('APPDATA')) / "ravendevteam"
         install_path.mkdir(parents=True, exist_ok=True)
@@ -61,8 +61,8 @@ def get_installation_path():
 
 
 
-""" Utility function to download a file """
 def download_file(url, destination, desc="Downloading"):
+    """ Utility function to download a file """
     try:
         context = ssl._create_unverified_context()
         with tqdm(unit='B', unit_scale=True, desc=desc) as pbar:
@@ -80,8 +80,8 @@ def download_file(url, destination, desc="Downloading"):
 
 
 
-""" Extract ZIP file to the target directory """
 def extract_zip(zip_path, extract_to):
+    """ Extract ZIP file to the target directory """
     try:
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_to)
@@ -93,8 +93,8 @@ def extract_zip(zip_path, extract_to):
 
 
 
-""" Utility function to create a shortcut to the first EXE file found """
 def create_shortcut(target_dir, shortcut_name):
+    """ Utility function to create a shortcut to the first EXE file found """
     try:
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
         shortcut_path = os.path.join(desktop, f"{shortcut_name}.lnk")
@@ -112,8 +112,8 @@ def create_shortcut(target_dir, shortcut_name):
 
 
 
-""" Install the specified package """
 def install_package(package, install_dir):
+    """ Install the specified package """
     platform_name = platform.system()
     if platform_name not in package["os"]:
         log(f"Package {package['name']} is not available for {platform_name}")
@@ -135,8 +135,8 @@ def install_package(package, install_dir):
 
 
 
-""" Begin the process of fetching the package list then installing them """
 def run_toolbox():
+    """ Begin the process of fetching the package list then installing them """
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s'
@@ -159,8 +159,8 @@ def run_toolbox():
     return success
 
 
-""" Main function """
 def main():
+    """ Main function """
     try:
         success = run_toolbox()
         return success
