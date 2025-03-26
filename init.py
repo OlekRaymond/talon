@@ -43,8 +43,8 @@ logging.basicConfig(
 
 
 
-""" Utility function to obtain information about Windows """
 def get_windows_info():
+    """ Utility function to obtain information about Windows """
     try:
         reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
         key = winreg.OpenKey(reg, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion")
@@ -67,8 +67,8 @@ def get_windows_info():
 
 
 
-""" Utility function to check if the program is being ran as administrator """
 def is_running_as_admin():
+    """ Utility function to check if the program is being ran as administrator """
     try:
         return ctypes.windll.shell32.IsUserAnAdmin() != 0
     except Exception as e:
@@ -77,8 +77,8 @@ def is_running_as_admin():
 
 
 
-""" If the program is not being ran as administrator, elevate """
 def restart_as_admin():
+    """ If the program is not being ran as administrator, elevate """
     try:
         script = sys.argv[0]
         params = ' '.join(sys.argv[1:])
@@ -90,8 +90,8 @@ def restart_as_admin():
 
 
 
-""" Main function to begin Talon installation """
 def main():
+    """ Main function to begin Talon installation """
     logging.info("Starting Talon Installer")
     if developer_mode:
         logging.warn(f"RUNNING IN DEVELOPER MODE!")
@@ -156,8 +156,8 @@ def main():
         except Exception as e:
             logging.error(f"Error during installation screen setup: {e}")
 
-    """ Run the installation process """
     def perform_installation():
+        """ Run the installation process """
         try:
             if install_raven:
                 logging.info("Installing Raven software...")
