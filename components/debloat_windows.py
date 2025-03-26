@@ -23,15 +23,15 @@ logging.basicConfig(
 
 
 
-""" Utility function to log outputs """
 def log(message):
+    """ Utility function to log outputs """
     logging.info(message)
     print(message)
 
 
 
-""" Utility function to check if the program is running as administrator """
 def is_admin():
+    """ Utility function to check if the program is running as administrator """
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
     except:
@@ -48,8 +48,8 @@ if not is_admin():
 
 
 
-""" Apply modifications done via the Windows registry """
 def apply_registry_changes():
+    """ Apply modifications done via the Windows registry """
     log("Applying registry changes...")
     try:
         registry_modifications = [
@@ -83,8 +83,8 @@ def apply_registry_changes():
 
 
 
-""" Run a script to remove Edge, and prevent reinstallation """
 def run_edge_vanisher():
+    """ Run a script to remove Edge, and prevent reinstallation """
     log("Starting Edge Vanisher script execution...")
     try:
         script_url = "https://code.ravendevteam.org/talon/edge_vanisher.ps1"
@@ -133,8 +133,8 @@ def run_edge_vanisher():
 
 
 
-""" Run a script to remove OneDrive and Outlook """
 def run_oouninstall():
+    """ Run a script to remove OneDrive and Outlook """
     log("Starting Office Online uninstallation process...")
     try:
         script_url = "https://code.ravendevteam.org/talon/uninstall_oo.ps1"
@@ -175,8 +175,8 @@ def run_oouninstall():
 
 
 
-""" Run ChrisTitusTech's WinUtil to debloat the system (Thanks Chris, you're a legend!) """
 def run_tweaks():
+    """ Run ChrisTitusTech's WinUtil to debloat the system (Thanks Chris, you're a legend!) """
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s'
@@ -247,8 +247,8 @@ def run_tweaks():
 
 
 
-""" Run Raphi's Win11Debloat script to further debloat the system (Thanks Raphire!) """
 def run_winconfig():
+    """ Run Raphi's Win11Debloat script to further debloat the system (Thanks Raphire!) """
     log("Starting Windows configuration process...")
     try:
         script_url = "https://win11debloat.raphi.re/"
@@ -332,8 +332,8 @@ def run_winconfig():
 
 
 
-""" Run a script to establish an update policy which only accepts security updates """
 def run_updatepolicychanger():
+    """ Run a script to establish an update policy which only accepts security updates """
     log("Starting UpdatePolicyChanger script execution...")
     log("Checking system state before UpdatePolicyChanger execution...")
     try:
@@ -417,8 +417,8 @@ def run_updatepolicychanger():
 
 
 
-""" Finalize installation by restarting """
 def finalize_installation():
+    """ Finalize installation by restarting """
     log("Installation complete. Restarting system...")
     try:
         subprocess.run(["shutdown", "/r", "/t", "0"], check=True)
