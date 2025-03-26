@@ -3,8 +3,8 @@ import subprocess
 
 
 
-""" Install whichever browser the user selected from browser_select_screen """
 def install_browser(selected_browser):
+    """ Install whichever browser the user selected from browser_select_screen """
     browser_map = {
         "Chrome": "Google.Chrome",
         "Brave": "Brave.Brave",
